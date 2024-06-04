@@ -39,26 +39,6 @@
   color: white;
 }
 
-/* .custom-table {
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.custom-thead {
-  background-color: #f8f9fa;
-  color: #1a254e;
-}
-
-.custom-tbody tr:hover {
-  background-color: #e9f1f8;
-}
-
-.custom-tbody td {
-  padding: 15px;
-  color: #1a254e;
-} */
-
 .custom-table {
   width: 100%;
   border-collapse: collapse;

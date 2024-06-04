@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Badge, Button, Card } from 'react-bootstrap';
-import { FaUserPlus } from 'react-icons/fa';
+import { Container, Row, Col, Badge, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import employeeService from '../service/EmployeeService';
 import '../App.css';
+import EmployeeList from './EmployeeList';
+import * as wjcGrid from '@mescius/wijmo.react.grid';
 
-const EmployeesList = () => {
+const EmployeesTable = () => {
     const navigate = useNavigate();
     const [employees, setEmployees] = useState([]);
     const [status, setStatus] = useState('');
-
-    const handleAddEmployeeClick = () => {
-        navigate('/form');
-    };
+    const [count, setCount] = useState(0);
+    const [data, setData] = React.useState();
 
     const handleActionButton = (id) => {
         navigate(`/update/${id}`);
@@ -22,6 +21,7 @@ const EmployeesList = () => {
         employeeService.getAllEmployees().then(response => {
             setEmployees(response.data);
             console.log(response.data);
+            setCount(response.data.length);
             setStatus('Active')
         }).catch(error => {
             console.error('There was an error fetching the employees!', error);
@@ -32,48 +32,7 @@ const EmployeesList = () => {
         <Container fluid>
             <Row className="my-4">
                 <Col className='p-4' style={{ backgroundColor: 'white', borderRadius: '20px' }}>
-                    <div className='d-flex justify-content-between align-items-center mb-4'>
-                        
-                        <div className='d-flex flex-column justify-content-start'>
-                        <h3 className="mb-1 text-left">Employees</h3>
-                            <h6 className="mb-0 text-muted">Complete list of all employees</h6>
-                        </div>
-                           
-                        
-                        <Button
-                            variant="primary"
-                            style={{ borderRadius: '15px', display: 'flex', alignItems: 'center' }}
-                            onClick={handleAddEmployeeClick}
-                        >
-                            <FaUserPlus style={{ marginRight: '5px' }} /> Add employee
-                        </Button>
-                    </div>
-                    <Row className="mb-4">
-                        <Col md={4}>
-                            <Card className="d-flex flex-row text-center align-items-center" style={{ backgroundColor: '#e9f1f8', borderRadius: '20px' }}>
-                                <Card.Body className="align-items-center">
-                                    <Card.Title>Total employees</Card.Title>
-                                    <Card.Text>{employees.length}</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col md={4}>
-                            <Card className="text-center" style={{ backgroundColor: '#e9f1f8', borderRadius: '20px' }}>
-                                <Card.Body>
-                                    <Card.Title>Active employees</Card.Title>
-                                    <Card.Text>{employees.filter(emp => emp.status === 'Active').length}</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col md={4}>
-                            <Card className="text-center" style={{ backgroundColor: '#e9f1f8', borderRadius: '20px' }}>
-                                <Card.Body>
-                                    <Card.Title>Yearly goal</Card.Title>
-                                    <Card.Text>45%</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
+                    <EmployeeList count={count}/>
                     <div className="custom-table mt-3">
                         <div className="custom-thead">
                             <Row className="header-row">
@@ -107,10 +66,11 @@ const EmployeesList = () => {
                             ))}
                         </div>
                     </div>
-                </Col>
+                    </Col>
             </Row>
         </Container>
+        
     );
 };
 
-export default EmployeesList;
+export default EmployeesTable;
