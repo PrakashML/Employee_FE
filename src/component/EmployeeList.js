@@ -14,13 +14,12 @@ const EmployeeList = ({count}) => {
 
   return (
     <>
-
     <div className='d-flex justify-content-between align-items-center mb-4'>  
         <div className='d-flex flex-column justify-content-start'>
             <h3 className="mb-1 text-left">Employees</h3>
             <h6 className="mb-0 text-muted">Complete list of all employees</h6>
         </div>
-                
+
         <Button variant="primary" style={{ borderRadius: '15px', display: 'flex', alignItems: 'center' }} onClick={handleAddEmployeeClick}> <FaUserPlus style={{ marginRight: '5px' }} /> Add employee</Button>
     </div>
 

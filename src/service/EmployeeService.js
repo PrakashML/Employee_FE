@@ -6,8 +6,12 @@ class EmployeeService{
         return axios.post("http://localhost:8080/payroll/employee/add",data)
     }
 
-    getAllEmployees(){
-        return axios.get("http://localhost:8080/payroll/employees")
+    getAllEmployees(filter){
+        let url = "http://localhost:8080/payroll/employees";
+        if (filter) {
+            url += `?filter=${encodeURIComponent(filter)}`;
+        }
+        return axios.get(url);
     }
 
     getEmployee(id){

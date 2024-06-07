@@ -11,7 +11,7 @@ const Header = () => {
   };
 
   return (
-    <Container fluid className="pt-3" style={{ backgroundColor: '#e9f1f8' }}>
+    <Container fluid className="pt-2" style={{ backgroundColor: '#e9f1f8' }}>
       <Row className="justify-content-between align-items-center">
         <Col xs="auto">
           <Nav activeKey={activeTab} onSelect={handleSelect}>
